@@ -121,5 +121,5 @@ class UNet3D(nn.Module):
         x = self.drop_d4(x)
         x = self.dec_conv4(x)
         
-        out = self.out_conv(x)
-        return out
+        logits = self.out_conv(x)
+        return logits
