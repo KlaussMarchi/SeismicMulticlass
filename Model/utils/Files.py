@@ -17,21 +17,6 @@ def getAllFiles(base):
 def getFile(path, index):
     return getFiles(path)[index]
 
-def loadFile(path):
-    file = Path(path)
-    ext  = file.suffix.lower()
-
-    if ext == '.png':
-        return cv2.imread(path)
-    
-    if ext == '.npy':
-        return np.load(path)
-    
-    if ext == '.dat':
-        return np.reshape(np.fromfile(path, dtype=np.single), (128, 128, 128))
-
-    return None
-
 def discretize(img, thresh=127):
     return cv2.threshold(img, thresh, 255, cv2.THRESH_BINARY)[1]
 
@@ -66,7 +51,6 @@ def pasteMask(img, mask, alpha=0.5, threshold=0.5, color=(0, 0, 255)):
 
     plt.tight_layout()
     plt.show()
-
 
 def showTile(img, mask=False):
     fig, axes = plt.subplots(1, 3, figsize=(12, 4))
