@@ -9,8 +9,8 @@ from monai.networks.layers import trunc_normal_
 import einops
 
 
-class ResACEUNet2(nn.Module):
 
+class ResACEUNet2(nn.Module):
     def __init__(
             self,
             in_channels: int,
