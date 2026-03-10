@@ -126,8 +126,7 @@ class Losses:
 
     multiclass = {
         'cross_entropy': CrossEntropyLoss(),      
-        'dice': MultiClassDiceLoss(),             
-        'diceCE': MultiClassDiceCELoss(),         
+        'dice': MultiClassDiceLoss(),        
         'dice_focal': MultiClassDiceFocalLoss(),  
         'focal': MultiClassFocalLoss(),           
         'tversky': MultiClassTverskyLoss(),       

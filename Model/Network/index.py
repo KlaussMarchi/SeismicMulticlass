@@ -14,21 +14,18 @@ from .types.ResACEUnet import ResACEUNet2
 class ModelNetwork:
     selected = None
 
-    def __init__(self, name, img_size=128, classes=1, channels=1, background=False, lr=1e-4):
+    def __init__(self, name, img_size=128, classes=1, channels=1, lr=1e-4):
         self.selected = name
         self.img_size = img_size
         self.classes  = classes
         self.multiclass = (self.classes > 1)
         self.channels   = channels
-        self.background = background
         
         self.device    = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.model     = self.getModel().to(self.device)
         self.optimizer = optim.AdamW(self.model.parameters(), lr=lr, weight_decay=1e-4)
 
-        if self.multiclass and background:
-            self.iou = MulticlassJaccardIndex(num_classes=self.classes, average='macro', ignore_index=0).to(self.device) 
-        elif self.multiclass and not background:
+        if self.multiclass:
             self.iou = MulticlassJaccardIndex(num_classes=self.classes, average='macro').to(self.device)
         else:
             self.iou = BinaryJaccardIndex(threshold=0.5).to(self.device)
